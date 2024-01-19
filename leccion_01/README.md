@@ -13,8 +13,8 @@ Este proyecto contiene un script en Rust diseñado para interactuar con un nodo 
 Antes de ejecutar el script, es necesario configurar las credenciales y la URL del nodo de Bitcoin Core. Modifique las constantes `USER` y `PWS` en el script para reflejar su usuario y contraseña de RPC.
 
 ```rust
-const USER:&str = "tu usuario"; // Reemplace 'userX' con su usuario
-const PWS:&str  = "tu clave";   // Reemplace 'wsx' con su contraseña
+const USER:&str = "tu usuario"; // Reemplace 'tu usuario' con su usuario
+const PWS:&str  = "tu clave";   // Reemplace 'tu clave' con su contraseña
 
 
 ## Uso
