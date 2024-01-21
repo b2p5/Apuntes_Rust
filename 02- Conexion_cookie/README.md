@@ -56,7 +56,7 @@ Esto enviará una solicitud RPC al nodo Bitcoin y mostrará la respuesta en la c
 
 ## Configuración
 
-Asegúrate de configurar correctamente la URL y el puerto del servidor RPC en la función `bitcoin_rpc_request`, según tu configuración de nodo de Bitcoin.
+Asegúrate de configurar correctamente la URL y el puerto del servidor RPC en la función `bitcoin_rpc_request`, según tu configuración de nodo de Bitcoin. Así como modificar "/tu ruta al fichero de/" .cookie
 
 ## Contribuciones
 
