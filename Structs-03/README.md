@@ -1,71 +1,57 @@
+# Interacción con el Mempool de Bitcoin Core
 
-# Bitcoin RPC Client en Rust
+Este proyecto proporciona una herramienta en Rust para interactuar con el mempool de un nodo de Bitcoin Core. Permite realizar diversas operaciones como recuperar, contar y buscar transacciones específicas en el mempool.
 
-Este proyecto proporciona un cliente RPC simple escrito en Rust para interactuar con un nodo de Bitcoin. Utiliza solicitudes HTTP para comunicarse con el nodo y obtener información a través de llamadas RPC.
+Todo ello se realiza con `structs`, una vez que se han leido las Txs de Bitcoin Core estas se almacenan en la struct RawMempool la cual depende de MempoolTransaction.
 
-## Funcionalidades
+## Características
 
-- **Leer Archivo .cookie**: Lee las credenciales necesarias para la autenticación con el nodo Bitcoin desde un archivo `.cookie`.
-- **Realizar Solicitudes RPC**: Envía solicitudes RPC a un nodo Bitcoin y procesa las respuestas.
+- Conexión con un nodo de Bitcoin Core.
+- Recuperación de las transacciones en el mempool.
+- Conteo de las transacciones en el mempool.
+- Búsqueda de una transacción específica por TXID.
+- Visualización de detalles de transacciones específicas.
 
-## Requisitos
+## Requisitos Previos
 
-- Rust
-- Cargo (gestor de paquetes de Rust)
-- Un nodo de Bitcoin en ejecución con acceso RPC habilitado
-
-## Dependencias
-
-- `reqwest`: Para realizar solicitudes HTTP.
-- `serde_json`: Para trabajar con datos en formato JSON.
-- `base64`: Para codificación y decodificación en Base64.
-- `tokio`: Como runtime para la ejecución asíncrona.
-
-## Instalación
-
-Asegúrate de tener instalado Rust y Cargo. Luego, clona este repositorio y navega hasta la carpeta del proyecto.
-
-```bash
-git clone [URL del repositorio]
-cd [nombre del proyecto]
-```
-
-## Uso
-
-El script principal (`main.rs`) realiza las siguientes funciones:
-
-1. **`read_bitcoin_cookie`**: Esta función lee el contenido del archivo `.cookie` del nodo Bitcoin, necesario para la autenticación. Asegúrate de especificar la ruta correcta al archivo `.cookie` en tu sistema. Has de 
-modificar "/tu ruta al fichero de/" por la ruta donde se encuentre el 
-archivo .cookie el cual debe contener "usuario:contraseña" (sin comillas)
-
-2. **`bitcoin_rpc_request`**: Esta función asíncrona envía una solicitud RPC al nodo Bitcoin. Requiere dos parámetros:
-   - `method`: El método RPC a invocar.
-   - `params`: Los parámetros del método RPC en formato JSON.
-
-3. **Punto de entrada `main`**: Un ejemplo de cómo utilizar la función `bitcoin_rpc_request` para obtener información sobre el blockchain de Bitcoin (`getblockchaininfo`).
-
-### Ejemplo
-
-Para ejecutar el cliente RPC y obtener información del blockchain, utiliza el comando:
-
-```bash
-cargo run
-```
-
-Esto enviará una solicitud RPC al nodo Bitcoin y mostrará la respuesta en la consola.
+Asegúrese de tener instalado Rust y acceso a un nodo de Bitcoin Core. Este proyecto está desarrollado y probado en `Ubuntu 22`.
 
 ## Configuración
 
-Asegúrate de configurar correctamente la URL y el puerto del servidor RPC en la función `bitcoin_rpc_request`, según tu configuración de nodo de Bitcoin. Así como modificar "/tu ruta al fichero de/" .cookie
+1. **Configuración del Nodo Bitcoin Core**: Asegúrese de que su nodo Bitcoin Core esté configurado correctamente para aceptar conexiones RPC. Necesitará las credenciales de usuario y contraseña para conectarse al nodo.
+
+2. **Variables de Entorno**: Configure las constantes `USER` y `PWS` en el script con su usuario y contraseña del nodo Bitcoin Core.
+
+## Instalación y Ejecución
+
+1. **Clonar Repositorio**: Clone este repositorio en su máquina local utilizando `git clone`.
+
+2. **Instalar Dependencias**: Navegue hasta el directorio del proyecto y ejecute `cargo build` para instalar todas las dependencias necesarias.
+
+3. **Ejecutar el Script**: Ejecute el proyecto con `cargo run`.
+
+## Estructura del Proyecto
+
+- `main.rs`: Contiene el código principal para interactuar con el mempool.
+- `mempool_data.rs`: Define las estructuras y métodos para manejar los datos del mempool.
+- `api.rs`: (Si aplica) Contiene la lógica para exponer funcionalidades como una API.
+
+## Dependencias
+
+- `bitcoincore_rpc`: Una biblioteca en Rust para comunicarse con el nodo Bitcoin Core a través de RPC.
 
 ## Contribuciones
 
-Las contribuciones al proyecto son bienvenidas. Por favor, asegúrate de seguir las mejores prácticas de programación en Rust y de probar tu código antes de enviar un pull request.
+Las contribuciones a este proyecto son bienvenidas. Por favor, siga las mejores prácticas de desarrollo y mantenga el código bien documentado.
 
 ## Licencia
 
-[Incluir detalles de la licencia aquí, si corresponde]
+Este proyecto se distribuye bajo la licencia [LICENCIA-DESEADA], que permite el uso, distribución y modificación.
+
+## Contacto
+
+Si tiene alguna pregunta o sugerencia, no dude en contactarme en [Correo/Perfil de GitHub].
 
 ---
 
-Este README proporciona una visión general del cliente RPC en Rust para Bitcoin. Para más detalles, revisa el código fuente y los comentarios incluidos en él.
+Este archivo `README.md` proporciona una guía clara y detallada para cualquier desarrollador que quiera utilizar o contribuir a tu proyecto. Asegúrate de personalizar las secciones de acuerdo a tus necesidades específicas, como la licencia, contacto, y detalles adicionales del proyecto.
