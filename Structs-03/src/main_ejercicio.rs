@@ -1,54 +1,85 @@
-// Importaciones de módulos y bibliotecas
-use reqwest; // Biblioteca para realizar solicitudes HTTP
-use serde_json::json; // Funcionalidad de serde_json para trabajar con JSON
-use std::{fs, io}; // Módulos estándar para manejo de archivos e I/O
-extern crate base64; // Biblioteca para codificación y decodificación Base64
+// Ejercicio sobre el uso de estructuras en Rust
+// Este código está incompleto y contiene errores
+// Debes buscar las ¿? y sustituirlo por el valor correcto
+// para que compile y funcione correctamente
+// Puedes encontrar la solución en Structs-03/src/main_solucion.rs
 
-// Función para leer el archivo .cookie de Bitcoin
-fn read_bitcoin_cookie() -> io::Result<String> {
-    // Asegúrate de especificar la ruta correcta al archivo .cookie
-    // Esta se encuentra en bitcoin.conf en la carpeta de datos de Bitcoin
-    let cookie_content = fs::read_to_string("/ ¿? tu ruta al fichero de/.cookie")?;
-    // Trimear y convertir el contenido a String
-    Ok(cookie_content. ¿? )
+
+// Importación de la biblioteca bitcoincore_rpc para interactuar con Bitcoin Core
+use bitcoincore_rpc::{Auth, Client, RpcApi};
+
+// Constantes para la autenticación en el nodo de Bitcoin Core
+const USER:&str = "tu_usuario";
+const PWS:&str  = "tu_contraseña";
+
+// Estructura que representa una transacción en el Mempool
+#[derive(Debug)]
+struct MempoolTransaction {
+    txid: String, // Identificador de la transacción (TXID)
+    // Campos adicionales pueden ser añadidos aquí (por ejemplo, tamaño, tarifas, tiempo de espera)
 }
 
-// Función asíncrona para realizar solicitudes RPC a Bitcoin
-async fn bitcoin_rpc_request(method: &str, params: serde_json::Value) -> Result<serde_json::Value, reqwest::Error> {
-    // Leer el archivo de cookies y manejar posibles errores
-    let cookie = ¿? .expect("Error leyendo el archivo de cookies");
-
-    // URL del servidor RPC
-    let rpc_url = "http://127.0.0.1:8332";
-
-    // Codificación Base64 de las credenciales contenidas en el archivo de cookies
-    let encoded_cookie = ¿?;
-
-    // Crear un cliente HTTP para enviar la solicitud
-    let client = reqwest::Client::new();
-    let res = client.post(rpc_url)
-        .header("Authorization", format!(¿?, ¿?))
-        .json(&json!({
-            // Construir el cuerpo de la solicitud con los parámetros adecuados
-            "jsonrpc": "2.0",
-            "id": "rust-bitcoin-rpc",
-            "method": method,
-            "params": params
-        }))
-        .send()
-        .await?; // Enviar la solicitud y esperar la respuesta
-
-    // Parsear la respuesta a JSON
-    let response_json = res.json::<serde_json::Value>().await?;
-    Ok(response_json)
+// Estructura para almacenar el Mempool completo
+#[derive(Debug)]
+struct RawMempool {
+    transactions: Vec<MempoolTransaction>, // Vector para almacenar las transacciones
 }
 
-// Punto de entrada principal para programas asíncronos en Rust
-#[tokio::main]
-async fn main() {
-    // Ejemplo de cómo llamar a la función bitcoin_rpc_request
-    let response = bitcoin_rpc_request("getblockchaininfo", json!([])).await.expect("Error en la solicitud RPC");
-    // Imprimir la respuesta en un formato legible
-    println!("{:#?}", response);
+// Implementación de métodos para la estructura RawMempool
+impl RawMempool {
+    // Método para añadir una transacción al Mempool
+    fn add_transaction(&mut self, tx: MempoolTransaction) {
+        self.¿?;
+    }
 
+    // Método para obtener el número de transacciones en el Mempool
+    fn get_transactions_count(&self) -> usize {
+        self.¿?;
+    }
+
+    // Método para obtener una transacción específica del Mempool por TXID
+    fn get_transaction(&self, txid: &str) -> Option<&MempoolTransaction> {
+        self.transactions.iter().¿?
+    }
+
+    // Aquí pueden implementarse otros métodos útiles (eliminar transacciones, buscar por otros criterios, etc.)
+}
+
+fn main() {
+    // Configuración de la conexión con el nodo Bitcoin Core
+    let rpc_url  = "http://localhost:8332"; // URL del nodo
+    let rpc_auth = Auth::UserPass(USER.to_string(), PWS.to_string()); // Autenticación
+    let client = Client::new(rpc_url, rpc_auth).expect("Error al conectar con Bitcoin Core");
+
+    // Obtener datos del Mempool del nodo Bitcoin Core
+    let raw_mempool_data = client.get_raw_mempool().expect("Error al obtener información del Mempool");
+
+    // Creación de una instancia de RawMempool
+    let mut raw_mempool = RawMempool { transactions: Vec::new() };
+    for txid in raw_mempool_data {
+        // Crear y añadir transacciones al Mempool
+        let tx = MempoolTransaction { txid: txid.to_string() };
+        raw_mempool.¿?(tx);
+    }
+
+    // Mostrar las transacciones en el Mempool
+    println!("Las transacciones en el Mempool son: {:#?}", raw_mempool);
+
+    // Mostrar el número de transacciones en el Mempool
+    println!("Hay {} transacciones en el Mempool \n", raw_mempool.¿?());
+    
+    // Buscar y mostrar una transacción específica en el Mempool por TXID
+    // OJO: Debes usar un TXID válido que se encuentre en el Mempool
+    let mi_txid = "6458c77a3970961323fe961c49eceef47f024aa0735268ff142b7d0eab6514d5";
+    let tx = raw_mempool.¿?(mi_txid);
+    println!("La transacción con el Txid {} es: {:#?}", mi_txid, tx);
+
+    // Imprime la transacción número 10 del Mempool
+    // Asegúrate de que haya al menos 10 transacciones en el Mempool para evitar un error de índice
+    if raw_mempool.transactions.len() > 10 {
+        let tx = raw_mempool.¿?(&raw_mempool.transactions[10].txid);
+        println!("La transacción número 10 del Mempool es: {:#?}", tx);
+    } else {
+        println!("No hay suficientes transacciones en el Mempool para mostrar la décima transacción.");
+    }
 }
