@@ -54,4 +54,4 @@ Si tiene alguna pregunta o sugerencia, no dude en contactarme en [Correo/Perfil 
 
 ---
 
-Este archivo `README.md` proporciona una guía clara y detallada para cualquier desarrollador que quiera utilizar o contribuir a tu proyecto. Asegúrate de personalizar las secciones de acuerdo a tus necesidades específicas, como la licencia, contacto, y detalles adicionales del proyecto.
+

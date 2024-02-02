@@ -62,10 +62,3 @@ Asegúrate de configurar correctamente la URL y el puerto del servidor RPC en la
 
 Las contribuciones al proyecto son bienvenidas. Por favor, asegúrate de seguir las mejores prácticas de programación en Rust y de probar tu código antes de enviar un pull request.
 
-## Licencia
-
-[Incluir detalles de la licencia aquí, si corresponde]
-
----
-
-Este README proporciona una visión general del cliente RPC en Rust para Bitcoin. Para más detalles, revisa el código fuente y los comentarios incluidos en él.
