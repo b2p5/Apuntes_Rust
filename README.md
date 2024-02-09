@@ -31,9 +31,6 @@ Para trabajar con los ejercicios, siga estos pasos:
 
 Las contribuciones a estos ejercicios son bienvenidas, ya sea para mejorar las soluciones existentes, ofrecer nuevas perspectivas, o proponer nuevos desafíos. Por favor, siga las mejores prácticas de desarrollo y documentación al contribuir.
 
-## Licencia
-
-Este proyecto está bajo [incluir tipo de licencia aquí]. Consulte el archivo LICENSE para más detalles.
 
 ---
 
